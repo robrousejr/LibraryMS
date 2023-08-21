@@ -3,10 +3,12 @@ package com.github.robrousejr.LibraryMS.services;
 import com.github.robrousejr.LibraryMS.models.Book;
 import com.github.robrousejr.LibraryMS.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BookService {
 
     private final BookRepository bookRepository;
