@@ -1,6 +1,7 @@
 package com.github.robrousejr.LibraryMS.models;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.util.Date;
 
@@ -19,6 +20,9 @@ public class IssuedBook {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Setter
     private Date issueDate;
+
+    @Setter
     private Date returnDate;
 }
