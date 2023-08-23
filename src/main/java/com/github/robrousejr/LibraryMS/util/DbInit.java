@@ -3,7 +3,7 @@ package com.github.robrousejr.LibraryMS.util;
 import com.github.robrousejr.LibraryMS.models.Role;
 import com.github.robrousejr.LibraryMS.models.User;
 import com.github.robrousejr.LibraryMS.repositories.RoleRepository;
-import com.github.robrousejr.LibraryMS.repositories.UserRepository;
+import com.github.robrousejr.LibraryMS.services.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.List;
 public class DbInit {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -32,6 +32,6 @@ public class DbInit {
         // Add 2 users, 1 admin and 1 user
         User adminUser = new User(1L, "Admin", "admin@gmail.com", "pass", adminRole);
         User normalUser = new User(2L, "User", "user@gmail.com", "pass", userRole);
-        userRepository.saveAll(List.of(adminUser, normalUser));
+        userService.saveAll(List.of(adminUser, normalUser));
     }
 }

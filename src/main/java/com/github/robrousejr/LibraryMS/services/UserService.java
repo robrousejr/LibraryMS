@@ -4,6 +4,7 @@ import com.github.robrousejr.LibraryMS.models.User;
 import com.github.robrousejr.LibraryMS.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,9 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder; // Add this line
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -26,8 +30,13 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+    public List<User> saveAll(List<User> users) {
+        users.forEach(user -> user.setPassword(passwordEncoder.encode(user.getPassword())));
+        return userRepository.saveAll(users);
+    }
 
     public User saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword())); // Modify this line
         return userRepository.save(user);
     }
 
@@ -40,7 +49,7 @@ public class UserService {
                 .map(user -> {
                     user.setName(updatedUser.getName());
                     user.setEmail(updatedUser.getEmail());
-                    user.setPassword(updatedUser.getPassword());
+                    user.setPassword(passwordEncoder.encode(updatedUser.getPassword())); // Modify this line
                     user.setRole(updatedUser.getRole());
                     return userRepository.save(user);
                 })
