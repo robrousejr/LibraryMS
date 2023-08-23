@@ -1,5 +1,6 @@
 package com.github.robrousejr.LibraryMS.models;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,9 @@ public class User {
     private String password;
 
     @Setter
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    @Enumerated(EnumType.STRING)
+    @JsonView(Role.class)
     private Role role;
 }
