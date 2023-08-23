@@ -1,4 +1,4 @@
-package com.github.robrousejr.LibraryMS.models;
+package com.github.robrousejr.LibraryMS.util;
 
 public class Views {
 

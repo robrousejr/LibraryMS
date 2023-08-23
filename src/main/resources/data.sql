@@ -1,9 +1,3 @@
-INSERT INTO ROLE (id, name) VALUES (1, 'ADMIN');
-INSERT INTO ROLE (id, name) VALUES (2, 'USER');
-
-INSERT INTO USERS (id, name, email, password, role_id) VALUES (1, 'admin', 'admin@gmail.com', 'pass', 1);
-INSERT INTO USERS (id, name, email, password, role_id) VALUES (2, 'user', 'user@gmail.com', 'pass', 2);
-
 INSERT INTO BOOK (title, author, genre, isbn, available_copies) VALUES ('Hunger Games', 'Suzanne Collins', 'Fantasy', '978-3-2112', 29);
 INSERT INTO BOOK (title, author, genre, isbn, available_copies) VALUES ('1984', 'George Orwell', 'Dystopian', '978-0-4522', 15);
 INSERT INTO BOOK (title, author, genre, isbn, available_copies) VALUES ('To Kill a Mockingbird', 'Harper Lee', 'Classic', '978-0-0620', 12);
