@@ -30,8 +30,8 @@ public class DbInit {
         roleRepository.saveAll(List.of(adminRole, userRole));
 
         // Add 2 users, 1 admin and 1 user
-        User adminUser = new User(1L, "Admin", "admin@gmail.com", "pass", adminRole);
-        User normalUser = new User(2L, "User", "user@gmail.com", "pass", userRole);
+        User adminUser = new User(1L, "admin", "admin@gmail.com", "pass", adminRole);
+        User normalUser = new User(2L, "user", "user@gmail.com", "pass", userRole);
         userService.saveAll(List.of(adminUser, normalUser));
     }
 }
