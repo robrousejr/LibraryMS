@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -53,6 +54,6 @@ public class UserService {
                     user.setRole(updatedUser.getRole());
                     return userRepository.save(user);
                 })
-                .orElseThrow(() -> new IllegalArgumentException("User with ID " + id + " not found"));
+                .orElseThrow(() -> new NoSuchElementException("User with ID " + id + " not found"));
     }
 }

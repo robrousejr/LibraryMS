@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -40,6 +41,6 @@ public class IssuedBookService {
                     issuedBook.setReturnDate(new Date()); // Set the return date to now
                     return issuedBookRepository.save(issuedBook);
                 })
-                .orElseThrow(() -> new IllegalArgumentException("IssuedBook with ID " + id + " not found"));
+                .orElseThrow(() -> new NoSuchElementException("IssuedBook with ID " + id + " not found"));
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/issued-books")
@@ -29,7 +30,7 @@ public class IssuedBookController {
     @GetMapping("/{id}")
     public IssuedBook getIssuedBookById(@PathVariable Long id) {
         return issuedBookService.getIssuedBookById(id)
-                .orElseThrow(() -> new IllegalArgumentException("IssuedBook with ID " + id + " not found"));
+                .orElseThrow(() -> new NoSuchElementException("IssuedBook with ID " + id + " not found"));
     }
 
     // POST /issued-books – Issue a new book to a user

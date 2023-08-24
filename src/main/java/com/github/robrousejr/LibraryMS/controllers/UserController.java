@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/users")
@@ -31,7 +32,7 @@ public class UserController {
 
         // TODO: Limit access to Role.ADMIN or user itself
         return userService.getUserById(id)
-                .orElseThrow(() -> new IllegalArgumentException("User with ID " + id + " not found"));
+                .orElseThrow(() -> new NoSuchElementException("User with ID " + id + " not found"));
     }
 
     // POST /users – Register a new user

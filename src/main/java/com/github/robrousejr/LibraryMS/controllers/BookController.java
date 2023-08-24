@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/books")
@@ -26,7 +27,7 @@ public class BookController {
     @GetMapping("/{id}")
     public Book getBookById(@PathVariable Long id) {
         return bookService.getBookById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Book with ID " + id + " not found"));
+                .orElseThrow(() -> new NoSuchElementException("Book with ID " + id + " not found"));
     }
 
     @PostMapping
