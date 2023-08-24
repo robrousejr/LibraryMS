@@ -60,11 +60,11 @@ public class TestHelper {
     }
 
     // Validates that 2 users are equivalent without comparing their IDs and passwords
-    // TODO: Add password comparison
     public static boolean compareUsers(User user1, User user2) {
         return Objects.equals(user1.getName(), user2.getName()) &&
                 Objects.equals(user1.getEmail(), user2.getEmail()) &&
-                Objects.equals(user1.getRole(), user2.getRole());
+                Objects.equals(user1.getRole(), user2.getRole()) &&
+                Objects.equals(user1.getPassword(), user2.getPassword());
     }
 
     // Validates that 2 lists of books are equivalent without comparing their IDs

@@ -32,7 +32,6 @@ public class UserServiceIntegrationTest {
     @Autowired
     private UserService userService;
 
-    // TODO: if this works, apply it to BookServiceIntegrationTest
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -139,8 +138,7 @@ public class UserServiceIntegrationTest {
     public void updateUser() {
 
         // Add a user
-        User user = TestHelper.buildUser();
-        userService.saveUser(user);
+        User user = userService.saveUser(TestHelper.buildUser());
 
         // Verify user exists
         assertTrue(userService.getUserById(user.getId()).isPresent());
@@ -149,12 +147,18 @@ public class UserServiceIntegrationTest {
         User updatedUser = TestHelper.buildUser();
         updatedUser.setName("Updated Name");
         updatedUser.setEmail("Updated Email");
+        updatedUser.setRole(user.getRole().equals(Role.USER) ? Role.ADMIN : Role.USER);
         updatedUser.setPassword("Updated Password");
-        updatedUser.setRole(Role.ADMIN);
         User actualUser = userService.updateUser(user.getId(), updatedUser);
 
         // Validate that the user is the one we updated
-        assertTrue(TestHelper.compareUsers(updatedUser, actualUser));
+        assertEquals(user.getId(), actualUser.getId());
+        assertEquals(updatedUser.getName(), actualUser.getName());
+        assertEquals(updatedUser.getEmail(), actualUser.getEmail());
+        assertEquals(updatedUser.getRole(), actualUser.getRole());
+
+        // Validate the password was encoded properly
+        assertTrue(passwordEncoder.matches(updatedUser.getPassword(), actualUser.getPassword()));
     }
 
 
