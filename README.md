@@ -9,7 +9,8 @@ A library management system REST API
 Create a Spring Boot project using Spring Initializr, and include the following dependencies:
 * Spring Web
 * Spring Data JPA
-* [H2 Database (or any other relational database you prefer)](#h2-database)
+* [H2 Database](#h2-database)
+* Lombok
 * Spring Security (optional for authentication)
 
 #### H2 Database
@@ -21,7 +22,7 @@ To connect to the H2 Console, navigate to localhost:8080/h2-console and enter th
 * `Driver Class: org.h2.Driver`
 
 ### Database Entities
-Create entities for Book, User, IssuedBook. Here's a rough structure:
+There are entities for Book, IssuedBook, User, Role.
 
 **Book:**
 - ID
@@ -36,7 +37,7 @@ Create entities for Book, User, IssuedBook. Here's a rough structure:
 - Name
 - Email
 - Password
-- Role (ADMIN, USER)
+- Role (*ADMIN*, *USER*)
 
 **IssuedBook:**
 - ID
@@ -44,26 +45,6 @@ Create entities for Book, User, IssuedBook. Here's a rough structure:
 - User (reference to User)
 - Issue Date
 - Return Date
-
-## Repositories
-
-Create JPA repositories for each entity:
-- BookRepository
-- UserRepository
-- IssuedBookRepository
-
-## Services
-
-Create service classes to encapsulate the business logic:
-- BookService
-- UserService
-- IssuedBookService
-
-## Controllers
-Create REST controllers to expose the API endpoints:
-- BookController
-- UserController
-- IssuedBookController
 
 ## API Endpoints
 
@@ -92,14 +73,8 @@ You can implement security using Spring Security:
 - Authenticate users with username and password
 - Authorize endpoints based on user roles (e.g., only admin can delete a user)
 
-## Error Handling
-Add global error handling to manage exceptions and provide meaningful error messages to the clients.
-
 ## Documentation
 Include API documentation using tools like Swagger.
 
 ## Testing
 Write unit and integration tests for the controllers, services, and repositories to ensure everything is working as expected.
-
-## Conclusion
-This project encompasses various aspects of modern web application development, such as CRUD operations, relationship management in databases, security, and testing. Carefully designing the architecture and following best practices can make this project an excellent learning experience for working with Spring Boot and RESTful services.
