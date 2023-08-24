@@ -5,6 +5,7 @@ import com.github.robrousejr.LibraryMS.util.Views;
 import jakarta.persistence.*;
 import lombok.Setter;
 
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -36,6 +37,20 @@ public class Role {
 
     public enum RoleName {
         Admin, User
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id) &&
+                roleName == role.roleName;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, roleName);
     }
 
 }
