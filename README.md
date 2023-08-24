@@ -3,14 +3,24 @@ A library management system REST API
 
 ## Project Details
 
-#### Dependencies and Configuration
+------------------
+
+### Dependencies and Configuration
 Create a Spring Boot project using Spring Initializr, and include the following dependencies:
 * Spring Web
 * Spring Data JPA
-* H2 Database (or any other relational database you prefer)
+* [H2 Database (or any other relational database you prefer)](#h2-database)
 * Spring Security (optional for authentication)
 
-#### Database Entities
+#### H2 Database
+H2 is an in-memory database that is used for development and testing. It is not recommended for production. 
+To connect to the H2 Console, navigate to localhost:8080/h2-console and enter the following details which can also be found in the `application.properties` file:
+* `JDBC URL: jdbc:h2:mem:testdb`
+* `Username: libraryMSUser`
+* `Password: libraryMSPassword`
+* `Driver Class: org.h2.Driver`
+
+### Database Entities
 Create entities for Book, User, IssuedBook. Here's a rough structure:
 
 **Book:**

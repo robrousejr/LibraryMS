@@ -4,6 +4,7 @@ import com.github.robrousejr.LibraryMS.models.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class TestHelper {
@@ -25,5 +26,27 @@ public class TestHelper {
         }
         return books;
     }
+
+    public static Book buildBook() {
+        return buildBookSeries(1).get(0);
+    }
+
+    // Validates that 2 books are equivalent without comparing their IDs
+    public static boolean compareBooks(Book book1, Book book2) {
+        return Objects.equals(book1.getTitle(), book2.getTitle()) &&
+                Objects.equals(book1.getAuthor(), book2.getAuthor()) &&
+                Objects.equals(book1.getIsbn(), book2.getIsbn()) &&
+                Objects.equals(book1.getGenre(), book2.getGenre()) &&
+                Objects.equals(book1.getAvailableCopies(), book2.getAvailableCopies());
+    }
+
+    // Validates that 2 lists of books are equivalent without comparing their IDs
+    public static boolean compareBookLists(List<Book> list1, List<Book> list2) {
+        if (list1.size() != list2.size()) return false;
+
+        List<Book> unmatchedBooks = new ArrayList<>(list2);
+        return list1.stream().allMatch(book1 -> unmatchedBooks.removeIf(book2 -> compareBooks(book1, book2)));
+    }
+
 
 }

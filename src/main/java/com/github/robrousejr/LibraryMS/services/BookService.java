@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -44,6 +45,6 @@ public class BookService {
                     book.setAvailableCopies(updatedBook.getAvailableCopies());
                     return bookRepository.save(book);
                 })
-                .orElseThrow(() -> new IllegalArgumentException("Book with ID " + id + " not found"));
+                .orElseThrow(() -> new NoSuchElementException("Book with ID " + id + " not found"));
     }
 }
