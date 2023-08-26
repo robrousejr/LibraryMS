@@ -6,6 +6,7 @@ import com.github.robrousejr.LibraryMS.repositories.RoleRepository;
 import com.github.robrousejr.LibraryMS.services.UserService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,11 +21,10 @@ public class DbInit {
     private RoleRepository roleRepository;
 
     @PostConstruct
-    private void postConstruct() {
+    @Profile("dev")
+    private void postConstructDev() {
 
-        // Add 2 roles, Admin and User
-        // TODO: At some point, only do this for DEV environments
-        // TODO: In prod, only create the roles and 1 user (admin)
+        // Add ADMIN, USER roles
         Role adminRole = Role.ADMIN;
         Role userRole = Role.USER;
         roleRepository.saveAll(List.of(adminRole, userRole));
@@ -33,5 +33,20 @@ public class DbInit {
         User adminUser = new User(1L, "admin", "admin@gmail.com", "pass", adminRole);
         User normalUser = new User(2L, "user", "user@gmail.com", "pass", userRole);
         userService.saveAll(List.of(adminUser, normalUser));
+    }
+
+    @PostConstruct
+    @Profile("prod")
+    private void postConstructProd() {
+
+        // Add ADMIN, USER roles
+        Role adminRole = Role.ADMIN;
+        Role userRole = Role.USER;
+        roleRepository.saveAll(List.of(adminRole, userRole));
+
+        // TODO: Update email address and password when deploying to production
+        // Add only 1 admin user
+        User adminUser = new User(1L, "admin", "admin@gmail.com", "pass", adminRole);
+        userService.saveAll(List.of(adminUser));
     }
 }
