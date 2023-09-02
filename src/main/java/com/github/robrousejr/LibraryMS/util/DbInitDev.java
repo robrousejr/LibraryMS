@@ -12,7 +12,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class DbInit {
+@Profile("dev")
+public class DbInitDev {
 
     @Autowired
     private UserService userService;
@@ -21,8 +22,7 @@ public class DbInit {
     private RoleRepository roleRepository;
 
     @PostConstruct
-    @Profile("dev")
-    private void postConstructDev() {
+    private void postConstruct() {
 
         // Add ADMIN, USER roles
         Role adminRole = Role.ADMIN;
@@ -33,20 +33,5 @@ public class DbInit {
         User adminUser = new User(1L, "admin", "admin@gmail.com", "pass", adminRole);
         User normalUser = new User(2L, "user", "user@gmail.com", "pass", userRole);
         userService.saveAll(List.of(adminUser, normalUser));
-    }
-
-    @PostConstruct
-    @Profile("prod")
-    private void postConstructProd() {
-
-        // Add ADMIN, USER roles
-        Role adminRole = Role.ADMIN;
-        Role userRole = Role.USER;
-        roleRepository.saveAll(List.of(adminRole, userRole));
-
-        // TODO: Update email address and password when deploying to production
-        // Add only 1 admin user
-        User adminUser = new User(1L, "admin", "admin@gmail.com", "pass", adminRole);
-        userService.saveAll(List.of(adminUser));
     }
 }
